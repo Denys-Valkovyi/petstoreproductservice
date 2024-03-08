@@ -13,8 +13,7 @@ RUN mvn clean package
 FROM openjdk:17-slim
 COPY --from=build /build/target/*.jar /app/petstoreproductservice.jar
 
-RUN curl -o applicationInsightsAgent.jar https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.5.0/applicationinsights-agent-3.5.0.jar
-COPY applicationInsightsAgent.jar /agent/applicationInsightsAgent.jar
+ADD https://github.com/microsoft/ApplicationInsights-Java/releases/download/3.5.0/applicationinsights-agent-3.5.0.jar /app
 
 EXPOSE 8080
-ENTRYPOINT ["java","-javaagent:/agent/applicationInsightsAgent.jar","-jar","/app/petstoreproductservice.jar"]
+ENTRYPOINT ["java","-javaagent:/app/applicationinsights-agent-3.5.0.jar","-jar","/app/petstoreproductservice.jar"]
