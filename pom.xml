@@ -19,7 +19,7 @@
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <applicationinsights.version>2.6.4</applicationinsights.version>
+        <applicationinsights.version>2.6.1</applicationinsights.version>
         <log4j.version>2.20.0</log4j.version>
         <springfox.version>3.0.0</springfox.version>
         <jackson.datatype.version>2.6.4</jackson.datatype.version>
@@ -45,6 +45,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>applicationinsights-spring-boot-starter</artifactId>
+			<version>${applicationinsights.version}</version>
+		</dependency>
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>applicationinsights-logging-logback</artifactId>
