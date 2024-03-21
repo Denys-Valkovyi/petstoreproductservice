@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import com.chtrembl.petstore.product.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -51,6 +52,9 @@ public class ProductApiController implements ProductApi {
 
 	@Autowired
 	private DataPreload dataPreload;
+
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public DataPreload getBeanToBeAutowired() {
@@ -101,7 +105,9 @@ public class ProductApiController implements ProductApi {
 					"PetStoreProductService incoming GET request to petstoreproductservice/v2/pet/findProductsByStatus?status=%s",
 					status));
 			try {
-				String petsJSON = new ObjectMapper().writeValueAsString(this.getPreloadedProducts());
+				List<Product> products = productRepository.findByStatus(status);
+				ProductApiController.log.info(products.toString());
+				String petsJSON = new ObjectMapper().writeValueAsString(products);
 				ApiUtil.setResponse(request, "application/json", petsJSON);
 				return new ResponseEntity<>(HttpStatus.OK);
 			} catch (JsonProcessingException e) {
