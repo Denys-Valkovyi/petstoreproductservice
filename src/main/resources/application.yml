@@ -16,8 +16,6 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  datasource:
-    url: ${AZURE_SQL_JDBC_CONNECTION_STRING}
   jpa:
     hibernate:
       ddl-auto: none
@@ -28,6 +26,10 @@ spring:
   sql:
     init:
       mode: always
+
+keyvault:
+  url: ${KEY_VAULT_URL}
+  connectionstringsecret: ${KEY_VAULT_SECRET_NAME}
 
 management:
   endpoints:
